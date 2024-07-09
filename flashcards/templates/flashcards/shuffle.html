@@ -1,0 +1,52 @@
+<!-- templates/flashcards/shuffle.html -->
+{% extends 'base.html' %}
+
+{% block title %}Study Flashcards{% endblock %}
+
+{% block content %}
+<h2>Study Flashcards</h2>
+<div id="flashcard" style="cursor: pointer; padding: 20px; text-align: center;">
+    {% if flashcards %}
+    <div id="front" style="display: block;">{{ flashcards.0.front_text }}</div>
+    <div id="back" style="display: none;">{{ flashcards.0.back_text }}</div>
+    {% else %}
+    <p>No flashcards available.</p>
+    {% endif %}
+</div>
+<button id="next-btn" style="display: block; margin: 20px auto;">Next Card</button>
+<a href="{% url 'flashcard_list' %}">Back to Flashcard List</a>
+
+<script>
+    const flashcardElement = document.getElementById('flashcard');
+    const frontElement = document.getElementById('front');
+    const backElement = document.getElementById('back');
+    const nextButton = document.getElementById('next-btn');
+
+    let isShowingFront = true;
+
+    flashcardElement.addEventListener('click', () => {
+        if (isShowingFront) {
+            frontElement.style.display = 'none';
+            backElement.style.display = 'block';
+        } else {
+            frontElement.style.display = 'block';
+            backElement.style.display = 'none';
+        }
+        isShowingFront = !isShowingFront;
+    });
+
+    nextButton.addEventListener('click', () => {
+        fetch('{% url "get_next_flashcard" %}')
+            .then(response => response.json())
+            .then(data => {
+                frontElement.textContent = data.front_text;
+                backElement.textContent = data.back_text;
+                flashcardElement.style.backgroundColor = data.color;
+                frontElement.style.display = 'block';
+                backElement.style.display = 'none';
+                isShowingFront = true;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+{% endblock %}

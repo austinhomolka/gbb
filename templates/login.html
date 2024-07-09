@@ -1,0 +1,24 @@
+<!-- templates/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label for="id_username">Email:</label>
+        <input type="email" name="username" autofocus autocapitalize="none" autocomplete="email" maxlength="254" required id="id_username">
+    </p>
+    <p>
+        <label for="id_password">Password:</label>
+        <input type="password" name="password" autocomplete="current-password" required id="id_password">
+    </p>
+    {% if form.errors %}
+    <p style="color: red">Your email and password didn't match. Please try again.</p>
+    {% endif %}
+    <button type="submit">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+{% endblock %}

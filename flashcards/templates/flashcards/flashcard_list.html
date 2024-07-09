@@ -1,0 +1,22 @@
+<!-- templates/flashcards/flashcard_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Flashcards{% endblock %}
+
+{% block content %}
+<h2>Your Flashcards</h2>
+<a href="{% url 'flashcard_create' %}">Create New Flashcard</a>
+<ul>
+    {% for flashcard in flashcards %}
+    <li style="background-color: {{ flashcard.color }};">
+        <strong>{{ flashcard.front_text }}</strong>
+        <p>{{ flashcard.back_text }}</p>
+        <a href="{% url 'flashcard_edit' flashcard.id %}">Edit</a>
+        <a href="{% url 'flashcard_delete' flashcard.id %}">Delete</a>
+    </li>
+    {% empty %}
+    <li>You don't have any flashcards yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'shuffle' %}">Shuffle and Study</a>
+{% endblock %}

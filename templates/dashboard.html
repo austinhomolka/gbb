@@ -1,0 +1,24 @@
+<!-- templates/dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Welcome to your dashboard, {{ user.username }}!</h1>
+    
+    <h2>Your Flashcards</h2>
+    {% for flashcard in flashcards %}
+        <div style="background-color: {{ flashcard.color }};">
+            <p>{{ flashcard.front_text }}</p>
+            <p>{{ flashcard.back_text }}</p>
+            {% if flashcard.icon %}
+                <img src="{{ flashcard.icon.url }}" alt="Flashcard icon">
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>You don't have any flashcards yet. Create one!</p>
+    {% endfor %}
+
+    <a href="{% url 'shuffle' %}">Shuffle</a>
+    <a href="{% url 'flashcard_create' %}">Add New Flashcard</a>
+{% endblock %}
