@@ -69,11 +69,11 @@ WSGI_APPLICATION = 'GBB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('PGDATABASE') or os.environ.get('POSTGRES_DB'),
-        'USER': os.environ.get('PGUSER') or os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('PGPASSWORD') or os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('PGHOST'),
-        'PORT': os.environ.get('PGPORT', '5432'),  # Default to 5432 if not specified
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': os.environ.get('PGPASSWORD'),
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '50154'
     }
 }
 
