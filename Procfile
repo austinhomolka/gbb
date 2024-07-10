@@ -1,1 +1,1 @@
-web: pip install -r requirements.txt && gunicorn GBB.wsgi
+web: gunicorn GBB.wsgi:application --log-file -
