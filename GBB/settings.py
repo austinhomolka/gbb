@@ -10,21 +10,15 @@ SECRET_KEY = 'django-insecure-cdw190ui4%tdzf1=6&%x8d6je624vlr39r6f4cyadg*w%*q(rp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'True'
 
-ALLOWED_HOSTS = [
-    'web-production-76b9.up.railway.appweb-production-76b9.up.railway.app',
-    'gbb.austinhomolka.com',
-    'localhost',
-    '127.0.0.1',
-    '[::1]',
-]
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://web-production-76b9.up.railway.app',
-    'http://web-production-76b9.up.railway.app',
+    'https://34.222.155.49:8000',
+    'http://34.222.155.49:8000',
     'https://gbb.austinhomolka.com',
-    'https://www.gbb.austinhomolka.com',
     'http://gbb.austinhomolka.com',
-    'http://www.gbb.austinhomolka.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
 ]
 
 # Application definition
