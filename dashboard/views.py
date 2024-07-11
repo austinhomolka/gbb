@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from flashcards.models import Flashcard
+import logging
+from django.http import HttpResponseServerError
 
 class SignUpForm(UserCreationForm):
     name = forms.CharField(max_length=100, required=True)
@@ -33,10 +35,18 @@ def home(request):
         return redirect('dashboard')
     return redirect('login')
 
+
+
+logger = logging.getLogger(__name__)
+
 @login_required
 def dashboard(request):
-    flashcards = Flashcard.objects.filter(user=request.user)
-    return render(request, 'dashboard.html', {'flashcards': flashcards})
+    try:
+        flashcards = Flashcard.objects.filter(user=request.user)
+        return render(request, 'dashboard.html', {'flashcards': flashcards})
+    except Exception as e:
+        logger.error(f"Error in dashboard view: {str(e)}")
+        return HttpResponseServerError("An error occurred. Please try again later.")
 
 def signup(request):
     if request.method == 'POST':
