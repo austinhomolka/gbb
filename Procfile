@@ -1,1 +1,1 @@
-web: gunicorn GBB.wsgi:application --log-file -
+web: gunicorn GBB.wsgi
