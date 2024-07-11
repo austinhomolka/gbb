@@ -5,21 +5,26 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-cdw190ui4%tdzf1=6&%x8d6je624vlr39r6f4cyadg*w%*q(rp')
+SECRET_KEY = 'django-insecure-cdw190ui4%tdzf1=6&%x8d6je624vlr39r6f4cyadg*w%*q(rp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+DEBUG = 'True'
 
 ALLOWED_HOSTS = [
     'web-production-0ba0.up.railway.app',
     'gbb.austinhomolka.com',
     'localhost',
     '127.0.0.1',
+    '[::1]',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://web-production-0ba0.up.railway.app',
+    'http://web-production-0ba0.up.railway.app',
     'https://gbb.austinhomolka.com',
+    'https://www.gbb.austinhomolka.com',
+    'http://gbb.austinhomolka.com',
+    'http://www.gbb.austinhomolka.com',
 ]
 
 # Application definition
@@ -113,27 +118,3 @@ AUTH_USER_MODEL = 'auth.User'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/login/'
-
-# Security settings for production
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    X_FRAME_OPTIONS = 'DENY'
-
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'ERROR',
-    },
-}
