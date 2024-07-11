@@ -114,11 +114,6 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/login/'
 
-# Session and CSRF settings
-SESSION_COOKIE_SECURE = True  # Ensure cookies are sent over HTTPS
-SESSION_COOKIE_SAMESITE = 'Lax'  # Adjust as necessary (could be 'None')
-CSRF_COOKIE_SECURE = True
-
 # AWS S3 Configuration (commented out)
 # AWS_ACCESS_KEY_ID = 'your_access_key_id'
 # AWS_SECRET_ACCESS_KEY = 'your_secret_access_key'
