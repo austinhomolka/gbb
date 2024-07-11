@@ -4,7 +4,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -15,11 +14,11 @@ SECRET_KEY = 'django-insecure-cdw190ui4%tdzf1=6&%x8d6je624vlr39r6f4cyadg*w%*q(rp
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
 CSRF_TRUSTED_ORIGINS = [
     'https://web-production-0ba0.up.railway.app',
     'https://gbb.austinhomolka.com'
 ]
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -62,14 +61,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'GBB.wsgi.application'
-
-# Database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -120,6 +111,11 @@ AUTH_USER_MODEL = 'auth.User'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+# Session and CSRF settings
+SESSION_COOKIE_SECURE = True  # Ensure cookies are sent over HTTPS
+SESSION_COOKIE_SAMESITE = 'Lax'  # Adjust as necessary (could be 'None')
+CSRF_COOKIE_SECURE = True
 
 # AWS S3 Configuration (commented out)
 # AWS_ACCESS_KEY_ID = 'your_access_key_id'
