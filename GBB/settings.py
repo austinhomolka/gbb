@@ -17,7 +17,9 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://web-production-0ba0.up.railway.app',
-    'https://gbb.austinhomolka.com'
+    'http://web-production-0ba0.up.railway.app',
+    'https://gbb.austinhomolka.com',
+    'http://gbb.austinhomolka.com',
 ]
 
 # Application definition
