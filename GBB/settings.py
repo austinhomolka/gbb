@@ -13,8 +13,8 @@ DEBUG = 'True'
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://34.222.155.49:8000',
-    'http://34.222.155.49:8000',
+    'https://web-production-2ef0.up.railway.app/'
+    'http://web-production-2ef0.up.railway.app/'
     'https://gbb.austinhomolka.com',
     'http://gbb.austinhomolka.com',
     'http://localhost:8000',
