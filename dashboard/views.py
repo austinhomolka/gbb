@@ -37,7 +37,7 @@ def home(request):
 
 logger = logging.getLogger(__name__)
 
-@login_required
+# @login_required
 def dashboard(request):
     try:
         decks = Deck.objects.filter(user=request.user)
