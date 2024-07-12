@@ -20,6 +20,15 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'https://web-production-2ef0.up.railway.app',
+    'http://web-production-2ef0.up.railway.app',
+    'https://gbb.austinhomolka.com',
+    'http://gbb.austinhomolka.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'flashcards',
+    # added
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -40,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Added
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'GBB.urls'
