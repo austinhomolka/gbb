@@ -4,11 +4,13 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cdw190ui4%tdzf1=6&%x8d6je624vlr39r6f4cyadg*w%*q(rp'
+SECRET_KEY = 'django-insecure-j9s#&)hu384f5kwvik+@ixfyp=g19)z32vgvjs1z&5qa42%6&1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Remember to set this to False in production
+DEBUG = True
+
 ALLOWED_HOSTS = ['*']  # This allows all hosts, but should be restricted in production
 
 CSRF_TRUSTED_ORIGINS = [
@@ -21,6 +23,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -62,6 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'GBB.wsgi.application'
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -73,7 +77,10 @@ DATABASES = {
     }
 }
 
+
 # Password validation
+# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -89,11 +96,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
+# https://docs.djangoproject.com/en/5.0/topics/i18n/
+
 LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
+
 USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
@@ -104,50 +121,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# User authentication
-# AUTH_USER_MODEL = 'auth.User'
-# LOGIN_URL = '/login/'
-# LOGIN_REDIRECT_URL = '/dashboard/'
-# LOGOUT_REDIRECT_URL = '/login/'
-
-# settings.py
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'debug.log'),
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-    },
-    'root': {
-        'handlers': ['console', 'file'],
-        'level': 'DEBUG',
-    },
-    'django': {
-        'handlers': ['console', 'file'],
-        'level': 'DEBUG',
-        'propagate': False,
-    },
-    'django.request': {
-        'handlers': ['console', 'file'],
-        'level': 'DEBUG',
-        'propagate': False,
-    },
-}
