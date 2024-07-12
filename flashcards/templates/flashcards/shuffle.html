@@ -4,17 +4,24 @@
 {% block title %}Study Flashcards{% endblock %}
 
 {% block content %}
-<h2>Study Flashcards</h2>
-<div id="flashcard" style="cursor: pointer; padding: 20px; text-align: center;">
+<h2>Study Flashcards: {% if deck %}{{ deck.name }}{% else %}All Decks{% endif %}</h2>
+<div id="flashcard" style="cursor: pointer; padding: 20px; text-align: center; border: 1px solid #ccc; border-radius: 10px; margin-bottom: 20px;">
     {% if flashcards %}
-    <div id="front" style="display: block;">{{ flashcards.0.front_text }}</div>
-    <div id="back" style="display: none;">{{ flashcards.0.back_text }}</div>
+    <div id="front" style="display: block; font-size: 24px;">{{ flashcards.0.front_text }}</div>
+    <div id="back" style="display: none; font-size: 24px;">{{ flashcards.0.back_text }}</div>
     {% else %}
     <p>No flashcards available.</p>
     {% endif %}
 </div>
 <button id="next-btn" style="display: block; margin: 20px auto;">Next Card</button>
-<a href="{% url 'flashcard_list' %}">Back to Flashcard List</a>
+<div style="text-align: center; margin-top: 20px;">
+    {% if deck %}
+    <a href="{% url 'deck_detail' deck.id %}" class="btn btn-secondary">Back to {{ deck.name }}</a>
+    {% else %}
+    <a href="{% url 'deck_list' %}" class="btn btn-secondary">Back to Deck List</a>
+    {% endif %}
+    <a href="{% url 'shuffle_all' %}" class="btn btn-primary">Shuffle All Decks</a>
+</div>
 
 <script>
     const flashcardElement = document.getElementById('flashcard');
@@ -23,6 +30,7 @@
     const nextButton = document.getElementById('next-btn');
 
     let isShowingFront = true;
+    let currentDeckId = {% if deck %}{{ deck.id }}{% else %}null{% endif %};
 
     flashcardElement.addEventListener('click', () => {
         if (isShowingFront) {
@@ -36,17 +44,30 @@
     });
 
     nextButton.addEventListener('click', () => {
-        fetch('{% url "get_next_flashcard" %}')
+        const url = currentDeckId 
+            ? `{% url 'get_next_flashcard' %}?deck_id=${currentDeckId}`
+            : '{% url 'get_next_flashcard' %}';
+        
+        fetch(url)
             .then(response => response.json())
             .then(data => {
-                frontElement.textContent = data.front_text;
-                backElement.textContent = data.back_text;
-                flashcardElement.style.backgroundColor = data.color;
-                frontElement.style.display = 'block';
-                backElement.style.display = 'none';
-                isShowingFront = true;
+                if (data.error) {
+                    flashcardElement.innerHTML = `<p>${data.error}</p>`;
+                    nextButton.disabled = true;
+                } else {
+                    frontElement.textContent = data.front_text;
+                    backElement.textContent = data.back_text;
+                    flashcardElement.style.backgroundColor = data.color;
+                    frontElement.style.display = 'block';
+                    backElement.style.display = 'none';
+                    isShowingFront = true;
+                    nextButton.disabled = false;
+                }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+                flashcardElement.innerHTML = '<p>An error occurred. Please try again.</p>';
+            });
     });
 </script>
 {% endblock %}

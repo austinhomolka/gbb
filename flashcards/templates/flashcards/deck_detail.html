@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ deck.name }}</h2>
+<a href="{% url 'create_flashcard' deck.id %}">Add Flashcard</a>
+<a href="{% url 'shuffle_deck' deck.id %}">Shuffle This Deck</a>
+<ul>
+    {% for flashcard in flashcards %}
+    <li style="background-color: {{ flashcard.color }};">
+        <strong>{{ flashcard.front_text }}</strong>
+        <p>{{ flashcard.back_text }}</p>
+    </li>
+    {% empty %}
+    <li>This deck has no flashcards yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'deck_list' %}">Back to Decks</a>
+{% endblock %}

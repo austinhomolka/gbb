@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Decks</h2>
+<a href="{% url 'create_deck' %}">Create New Deck</a>
+<ul>
+    {% for deck in decks %}
+    <li>
+        <a href="{% url 'deck_detail' deck.id %}">{{ deck.name }}</a>
+        ({{ deck.flashcards.count }} flashcards)
+    </li>
+    {% empty %}
+    <li>You don't have any decks yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'shuffle_all' %}">Shuffle All Flashcards</a>
+{% endblock %}

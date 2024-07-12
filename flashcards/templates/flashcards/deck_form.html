@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{% if form.instance.pk %}Edit Flashcard{% else %}Create Flashcard{% endif %}</h2>
+<h2>{% if form.instance.pk %}Edit Deck{% else %}Create New Deck{% endif %}</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>
-<a href="{% url 'deck_detail' deck.id %}">Back to Deck</a>
+<a href="{% url 'deck_list' %}">Back to Deck List</a>
 {% endblock %}

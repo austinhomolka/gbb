@@ -1,15 +1,19 @@
-# flashcards/models.py
-
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
-User = get_user_model()
+class Deck(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
 class Flashcard(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    deck = models.ForeignKey(Deck, related_name='flashcards', on_delete=models.CASCADE, null=True)
     front_text = models.TextField()
     back_text = models.TextField()
-    # icon = models.ImageField(upload_to='flashcard_icons/', null=True, blank=True)
     color = models.CharField(max_length=7, default='#FFFFFF')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

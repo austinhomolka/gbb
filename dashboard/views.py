@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from flashcards.models import Flashcard
+from flashcards.models import Flashcard, Deck
 import logging
 from django.http import HttpResponseServerError
 
@@ -35,15 +35,13 @@ def home(request):
         return redirect('dashboard')
     return redirect('login')
 
-
-
 logger = logging.getLogger(__name__)
 
 @login_required
 def dashboard(request):
     try:
-        flashcards = Flashcard.objects.filter(user=request.user)
-        return render(request, 'dashboard.html', {'flashcards': flashcards})
+        decks = Deck.objects.filter(user=request.user)
+        return render(request, 'dashboard.html', {'decks': decks})
     except Exception as e:
         logger.error(f"Error in dashboard view: {str(e)}")
         return HttpResponseServerError("An error occurred. Please try again later.")
