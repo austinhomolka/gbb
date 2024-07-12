@@ -7,6 +7,10 @@
     <h1>Welcome to your dashboard, {{ user.username }}!</h1>
     
     <h2>Your Flashcards</h2>
+
+    <a href="{% url 'shuffle' %}">Shuffle</a>
+    <a href="{% url 'flashcard_create' %}">Add New Flashcard</a>
+
     {% for flashcard in flashcards %}
         <div style="background-color: {{ flashcard.color }};">
             <p>{{ flashcard.front_text }}</p>
@@ -19,6 +23,4 @@
         <p>You don't have any flashcards yet. Create one!</p>
     {% endfor %}
 
-    <a href="{% url 'shuffle' %}">Shuffle</a>
-    <a href="{% url 'flashcard_create' %}">Add New Flashcard</a>
 {% endblock %}
