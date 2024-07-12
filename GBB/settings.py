@@ -10,8 +10,6 @@ SECRET_KEY = 'django-insecure-cdw190ui4%tdzf1=6&%x8d6je624vlr39r6f4cyadg*w%*q(rp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # Remember to set this to False in production
 ALLOWED_HOSTS = ['*']  # This allows all hosts, but should be restricted in production
-CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
 
 CSRF_TRUSTED_ORIGINS = [
     'https://web-production-2ef0.up.railway.app',
@@ -109,7 +107,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # User authentication
-AUTH_USER_MODEL = 'auth.User'
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/login/'
+# AUTH_USER_MODEL = 'auth.User'
+# LOGIN_URL = '/login/'
+# LOGIN_REDIRECT_URL = '/dashboard/'
+# LOGOUT_REDIRECT_URL = '/login/'
