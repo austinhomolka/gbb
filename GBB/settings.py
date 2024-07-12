@@ -20,15 +20,6 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'https://web-production-2ef0.up.railway.app',
-    'http://web-production-2ef0.up.railway.app',
-    'https://gbb.austinhomolka.com',
-    'http://gbb.austinhomolka.com',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-]
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,8 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'flashcards',
-    # added
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -51,8 +40,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Added
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'GBB.urls'
@@ -124,3 +111,43 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_URL = '/login/'
 # LOGIN_REDIRECT_URL = '/dashboard/'
 # LOGOUT_REDIRECT_URL = '/login/'
+
+# settings.py
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'debug.log'),
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+    },
+    'django': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+        'propagate': False,
+    },
+    'django.request': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+        'propagate': False,
+    },
+}
