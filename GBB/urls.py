@@ -4,7 +4,11 @@ from django.contrib.auth import views as auth_views
 from dashboard import views as dashboard_views
 from flashcards import views as flashcard_views
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 urlpatterns = [
+    path('sentry-debug/', trigger_error),
     path('admin/', admin.site.urls),
     path('', dashboard_views.home, name='home'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
