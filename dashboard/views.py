@@ -10,6 +10,7 @@ from flashcards.models import Flashcard, Deck
 import logging
 from django.http import HttpResponseServerError
 
+# Define the custom sign-up form
 class SignUpForm(UserCreationForm):
     name = forms.CharField(max_length=100, required=True)
     email = forms.EmailField(required=True)
@@ -30,14 +31,17 @@ class SignUpForm(UserCreationForm):
             user.save()
         return user
 
+# Home view redirects to dashboard if the user is authenticated, else to login
 def home(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     return redirect('login')
 
+# Set up logging
 logger = logging.getLogger(__name__)
 
-# @login_required
+# Dashboard view shows the user's decks
+@login_required
 def dashboard(request):
     try:
         decks = Deck.objects.filter(user=request.user)
@@ -46,6 +50,7 @@ def dashboard(request):
         logger.error(f"Error in dashboard view: {str(e)}")
         return HttpResponseServerError("An error occurred. Please try again later.")
 
+# Sign-up view handles user registration
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -60,6 +65,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+# Logout view logs out the user and redirects to login
 @login_required
 def logout_view(request):
     logout(request)
